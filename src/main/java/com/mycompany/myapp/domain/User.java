@@ -77,6 +77,18 @@ public class User extends AbstractAuditingEntity<String> implements Serializable
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
 
+    @JsonIgnore
+    @Field("skills")
+    private Set<String> skills = new HashSet<>();
+
+    @Size(max = 50)
+    @Field("description")
+    private String description;
+
+    @Size(max = 50)
+    @Field("workType")
+    private String workType;
+
     public String getId() {
         return id;
     }
@@ -182,6 +194,30 @@ public class User extends AbstractAuditingEntity<String> implements Serializable
         this.authorities = authorities;
     }
 
+    public Set<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<String> skills) {
+        this.skills = skills;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -211,6 +247,9 @@ public class User extends AbstractAuditingEntity<String> implements Serializable
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
+            ", skills='" + skills + '\'' +
+            ", description='" + description + '\'' +
+            ", workType='" + workType + '\'' +
             "}";
     }
 }

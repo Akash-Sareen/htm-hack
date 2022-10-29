@@ -8,7 +8,6 @@ import { LANGUAGES } from 'app/config/language.constants';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 
 @Component({
@@ -30,7 +29,6 @@ export class NavbarComponent implements OnInit {
     private translateService: TranslateService,
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
-    private profileService: ProfileService,
     private router: Router
   ) {
     if (VERSION) {
@@ -40,10 +38,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.entitiesNavbarItems = EntityNavbarItems;
-    this.profileService.getProfileInfo().subscribe(profileInfo => {
-      this.inProduction = profileInfo.inProduction;
-      this.openAPIEnabled = profileInfo.openAPIEnabled;
-    });
 
     this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;

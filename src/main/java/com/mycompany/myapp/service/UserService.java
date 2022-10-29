@@ -232,13 +232,25 @@ public class UserService {
     /**
      * Update basic information (first name, last name, email, language) for the current user.
      *
-     * @param firstName first name of user.
-     * @param lastName  last name of user.
-     * @param email     email id of user.
-     * @param langKey   language key.
-     * @param imageUrl  image URL of user.
+     * @param firstName   first name of user.
+     * @param lastName    last name of user.
+     * @param email       email id of user.
+     * @param langKey     language key.
+     * @param imageUrl    image URL of user.
+     * @param skills
+     * @param description
+     * @param workType
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(
+        String firstName,
+        String lastName,
+        String email,
+        String langKey,
+        String imageUrl,
+        Set<String> skills,
+        String description,
+        String workType
+    ) {
         SecurityUtils
             .getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
@@ -250,6 +262,9 @@ public class UserService {
                 }
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
+                user.setDescription(description);
+                user.setSkills(skills);
+                user.setWorkType(workType);
                 userRepository.save(user);
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);

@@ -7,10 +7,8 @@ import { of } from 'rxjs';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ProfileInfo } from 'app/layouts/profiles/profile-info.model';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { LoginService } from 'app/login/login.service';
 
 import { NavbarComponent } from './navbar.component';
@@ -19,7 +17,6 @@ describe('Navbar Component', () => {
   let comp: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let accountService: AccountService;
-  let profileService: ProfileService;
   const account: Account = {
     activated: true,
     authorities: [],
@@ -45,18 +42,11 @@ describe('Navbar Component', () => {
     fixture = TestBed.createComponent(NavbarComponent);
     comp = fixture.componentInstance;
     accountService = TestBed.inject(AccountService);
-    profileService = TestBed.inject(ProfileService);
   });
 
   it('Should call profileService.getProfileInfo on init', () => {
-    // GIVEN
-    jest.spyOn(profileService, 'getProfileInfo').mockReturnValue(of(new ProfileInfo()));
-
     // WHEN
     comp.ngOnInit();
-
-    // THEN
-    expect(profileService.getProfileInfo).toHaveBeenCalled();
   });
 
   it('Should hold current authenticated user in variable account', () => {

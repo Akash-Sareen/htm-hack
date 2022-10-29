@@ -1,13 +1,16 @@
 package com.mycompany.myapp.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -51,6 +54,12 @@ public class AdminUserDTO implements Serializable {
 
     private Set<String> authorities;
 
+    private Set<String> skills = new HashSet<>();
+
+    private String description;
+
+    private String workType;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -69,6 +78,9 @@ public class AdminUserDTO implements Serializable {
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+        this.skills = user.getSkills();
+        this.description = user.getDescription();
+        this.workType = user.getWorkType();
     }
 
     public String getId() {
@@ -173,6 +185,30 @@ public class AdminUserDTO implements Serializable {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public Set<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<String> skills) {
+        this.skills = skills;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
     }
 
     // prettier-ignore

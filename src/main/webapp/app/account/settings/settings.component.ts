@@ -34,6 +34,9 @@ export class SettingsComponent implements OnInit {
     activated: new FormControl(initialAccount.activated, { nonNullable: true }),
     authorities: new FormControl(initialAccount.authorities, { nonNullable: true }),
     imageUrl: new FormControl(initialAccount.imageUrl, { nonNullable: true }),
+    skills: new FormControl(initialAccount.skills, { nonNullable: true }),
+    description: new FormControl(initialAccount.description, { nonNullable: true }),
+    workType: new FormControl(initialAccount.workType, { nonNullable: true }),
     login: new FormControl(initialAccount.login, { nonNullable: true }),
   });
 

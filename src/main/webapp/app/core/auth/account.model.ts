@@ -7,6 +7,9 @@ export class Account {
     public langKey: string,
     public lastName: string | null,
     public login: string,
-    public imageUrl: string | null
+    public imageUrl: string | null,
+    public skills: string[] | null,
+    public description: string | null,
+    public workType: string | null
   ) {}
 }
